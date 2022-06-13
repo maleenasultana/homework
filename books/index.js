@@ -1,6 +1,6 @@
 const express= require("express");
 const bodyParser= require('body-parser');
-const indexconfig=require("./book.config");
+const indexConfig=require("./book.config");
 const app =express();
 
 app.use(bodyParser.urlencoded({extended: true}));
@@ -34,6 +34,6 @@ function init() {
 
 
 
-app.listen(PORT, () => {
+app.listen(indexConfig.PORT, () => {
     console.log(`Application started on the port no : ${PORT}`)
 })
