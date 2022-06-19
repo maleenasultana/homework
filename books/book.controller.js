@@ -1,5 +1,7 @@
-const db = require(".books.model");
+const db = require("./book.model");
+const uuid =require("uuid");
 const book = db.book;
+const User = db.user;
 
 /**
  * create and save a new book
@@ -80,6 +82,7 @@ exports.findOne=(req,res)=>{
 
 exports.update = (req,res) => {
       const book = {
+            id:uuid.v4(),
             name: req.body.name,
             description: req.body.description,
             author: req.body.author,

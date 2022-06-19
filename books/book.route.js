@@ -1,9 +1,11 @@
-const bookController= require("./books.controller");
+const express= require("express");
+const router = express.Router();
+const bookController= require("./book.controller");
 
 module.exports = function(app){
-    app.post("homework/api/v1/books",bookController.create);
-    app.get("homework/api/v1/books",bookController.findAll);
-    app.get("homework/api/v1/books",bookController.findOne);
-    app.put("homework/api/v1/books",bookController.update);
-    app.delete("homework/api/v1/books",bookController.delete);
+    app.post("/",[authJwt.validateBookRequest],bookController.create);
+    app.get("/",[authJwt.validateBookRequest],bookController.findAll);
+    app.get("/:id",[authJwt.validateBookRequest],bookController.findOne);
+    app.put("/:id",[authJwt.validateBookRequest],bookController.update);
+    app.delete("/:id",[authJwt.validateBookRequest],bookController.delete);
 }

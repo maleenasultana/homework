@@ -1,18 +1,22 @@
 const express= require("express");
 const bodyParser= require('body-parser');
-const indexConfig=require("./book.config");
+const indexConfig=require("./books/book.config");
+const bookrouter=require("./books/book.route");
 const app =express();
+
+const PORT = 8080;
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
-const db = require("./book.model");
+const db = require("./books/book.model");
 const book = db.book;
 
-// db.sequelize.sync({force: true})
-// .then(() => {
-//     console.log('tables dropped and created');
-//     init();
-//})
+app.get('/',(req,res)=>{
+    res.send("This API is working")
+});
+
+
+// 
 function init() {
     var books = [
         {
@@ -35,5 +39,5 @@ function init() {
 
 
 app.listen(indexConfig.PORT, () => {
-    console.log(`Application started on the port no : ${PORT}`)
+    console.log(`Application started on the port no : ${PORT}`);
 })
