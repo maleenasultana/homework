@@ -87,13 +87,18 @@ exports.update = (req,res) => {
             description: req.body.description,
             author: req.body.author,
            categoryName:req.body.categoryName,
-           cost: req.body.cost
+           cost: req.body.cost,
+           userId:req.body.userId
       };
       const bookId= req.params.id
 
       book.update( book, {
-            where: {id:  bookId}
+            where: {
+            [op.and]:{id:  bookId},
+            role:{admin}
+            }
       })
+
       .then(updatedbook =>{
       
         book.findByPk( bookId)
@@ -113,6 +118,7 @@ exports.update = (req,res) => {
             })
       })
 }
+
 /**
  * Delete an existing  book based on  book name
  */
@@ -121,7 +127,8 @@ exports.delete=(req,res) => {
       const  bookId =req.params.id;
       book.destroy({
             where: {
-                  id:  bookId
+            [op.and]:{ id:  bookId},
+                role:{admin} 
             }
       })
 
